@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @disbursement %>
+
+<div>
+  <%= link_to "Edit this disbursement", edit_disbursement_path(@disbursement) %> |
+  <%= link_to "Back to disbursements", disbursements_path %>
+
+  <%= button_to "Destroy this disbursement", @disbursement, method: :delete %>
+</div>

@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Disbursements</h1>
+
+<div id="disbursements">
+  <% @disbursements.each do |disbursement| %>
+    <h3><%= disbursement.orders.first.merchant.reference  %></h3>
+    <h4>Amount disbursed = <%= number_to_currency(disbursement.amount, unit: '€', separator: ",", delimiter: ".", format: "%n %u")  %></h4>
+    <h4>Fees collected = <%= number_to_currency(disbursement.total_fee, unit: '€', separator: ",", delimiter: ".", format: "%n %u") %></h4>
+    <ul>
+      <% disbursement.orders.each do |order| %>
+        <li><%= order.reference_date %>, <%= number_to_currency(order.amount, unit: '€', separator: ",", delimiter: ".", format: "%n %u") %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="text-end mb-3">
+    <%= page_entries_info @disbursements, entry_name: "disbursement" %>
+    <div class="d-flex justify-content-end">
+      <%= paginate @disbursements, remote: true %>
+    </div>
+  </div>
+</div>
+
+<%= link_to "New disbursement", new_disbursement_path %>

@@ -1,0 +1,23 @@
+<div class="mt-5">
+  <h1>Annual Report</h1>
+  <table class="table table-striped table-bordered mt-4">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Number of disbursements</th>
+        <th>Amount disbursed to merchants</th>
+        <th>Amount of order fees</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @disbursements_count.each do |key, value| %>
+        <tr>
+          <td><%= key.strftime("%Y")  %></td>
+          <td><%= number_with_precision(value, delimiter: ".", precision: 0) %></td>
+          <td><%= number_to_currency(@disbursements_amount[key], unit: '€', separator: ",", delimiter: ".", format: "%n %u") %></td>
+          <td><%= number_to_currency(@disbursements_fees[key], unit: '€', separator: ",", delimiter: ".", format: "%n %u") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
